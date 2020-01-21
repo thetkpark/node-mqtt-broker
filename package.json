@@ -6,8 +6,9 @@
   "dependencies": {
     "backpack-core": "^0.8.4",
     "mosca": "^2.8.3"
-  }
-  "scripts": {
-    "dev": "backpack"
   },
+  "scripts": {
+    "dev": "backpack",
+    "build": "backpack build"
+  }
 }
