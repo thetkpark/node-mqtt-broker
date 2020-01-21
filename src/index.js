@@ -20,5 +20,5 @@ server.on('clientDisconnected', (client) => {
 })
 
 server.on('published', (packet, client) => {
-    console.log(packet);
+    console.log(packet.payload.toString());
 })
