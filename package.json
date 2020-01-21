@@ -1,0 +1,13 @@
+{
+  "name": "node-mqtt-broker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "backpack-core": "^0.8.4",
+    "mosca": "^2.8.3"
+  }
+  "scripts": {
+    "dev": "backpack"
+  },
+}
