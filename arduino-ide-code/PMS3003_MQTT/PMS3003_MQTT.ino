@@ -101,7 +101,13 @@ void loop()
             break;
         }
 
-        if (mqtt.connect(MQTT_NAME, MQTT_USERNAME, MQTT_PASSWORD)){ 
+        index++;
+    }
+    while (mySerial.available())
+        mySerial.read();
+    Serial.println(" }");
+    if (mqtt.connect(MQTT_NAME, MQTT_USERNAME, MQTT_PASSWORD)){ 
+ 
           Serial.print("\n Publish message: ");
           char payload[100];
           sprintf(payload, "%u %u %u", pm1, pm2_5, pm10); 
@@ -115,12 +121,5 @@ void loop()
             Serial.println("Fail sending");
           }
         }
-
-
-        index++;
-    }
-    while (mySerial.available())
-        mySerial.read();
-    Serial.println(" }");
     delay(10000);
 }

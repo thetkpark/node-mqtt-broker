@@ -10,9 +10,8 @@ server.on('ready', () => {
     console.log('Ready');
 })
 
-
 server.on('clientConnected', (client) => {
-    console.log(`Client connected: ${client}`);
+    console.log('ClientConnected');
 })
 
 server.on('clientDisconnected', (client) => {
@@ -20,5 +19,19 @@ server.on('clientDisconnected', (client) => {
 })
 
 server.on('published', (packet, client) => {
-    console.log(packet.payload.toString());
+    if(/[a-z]/.test(packet.payload.toString())) return 0;
+    const data = /(\d*) (\d*) (\d*)/.exec(packet.payload.toString());
+    console.log(`PM 1.0: ${data[1]}`)
+    console.log(`PM 2.5: ${data[2]}`)
+    console.log(`PM 10: ${data[3]}`)
 })
+
+
+
+
+function name(params) {
+    return params+1;
+}
+
+
+name(5);
