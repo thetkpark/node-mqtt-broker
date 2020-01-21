@@ -1,17 +1,21 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 #include <SoftwareSerial.h>
-#define WIFI_STA_NAME "Sethanant’s iPhone"
-#define WIFI_STA_PASS "123456777"
-#define MQTT_SERVER "172.20.10.2"
+#include "DHTesp.h"
+#define WIFI_STA_NAME "888/73 Guest"
+#define WIFI_STA_PASS "guest88873"
+#define MQTT_SERVER "192.168.2.103"
 #define MQTT_PORT 1883
 #define MQTT_USERNAME ""
 #define MQTT_PASSWORD ""
 #define MQTT_NAME "esp8266"
 SoftwareSerial mySerial(D2, D3); // RX, TX
+DHTesp dht;
 unsigned int pm1 = 0;
 unsigned int pm2_5 = 0;
 unsigned int pm10 = 0;
+unsigned int humidity = 0;
+unsigned int temp_c = 0;
 WiFiClient client;
 PubSubClient mqtt(client);
 int num = 0;
@@ -32,6 +36,7 @@ void setup()
     while (!Serial)
         ;
     mySerial.begin(9600);
+    dht.setup(12, DHTesp::DHT11); // Connect DHT sensor to GPIO 12
     delay(250);
     Serial.println(WIFI_STA_NAME);
     Serial.println("WIFI Connecting");
@@ -53,6 +58,17 @@ void setup()
     mqtt.setServer(MQTT_SERVER, MQTT_PORT);
     mqtt.setCallback(callback);
 }
+
+void gettemperature() {
+  humidity = dht.getHumidity();     // Read humidity (percent)
+  temp_c = dht.getTemperature();    // Read temperature as Fahrenheit
+  if (isnan(humidity) || isnan(temp_c)) {
+      Serial.println("Failed to read from DHT sensor!");
+      return;
+  }
+}
+
+
 void loop()
 {
     int index = 0;
@@ -106,15 +122,25 @@ void loop()
     while (mySerial.available())
         mySerial.read();
     Serial.println(" }");
+    gettemperature();
     if (mqtt.connect(MQTT_NAME, MQTT_USERNAME, MQTT_PASSWORD)){ 
  
           Serial.print("\n Publish message: ");
-          char payload[100];
-          sprintf(payload, "%u %u %u", pm1, pm2_5, pm10); 
-          if (mqtt.publish("SENSOR/PMS3003", payload) == true)
+          char payloadPMS3003[100];
+          sprintf(payloadPMS3003, "%u %u %u", pm1, pm2_5, pm10); 
+          if (mqtt.publish("SENSOR/PMS3003", payloadPMS3003) == true)
             {
-              Serial.println("Success sending");
+              Serial.println("Success sending PMS3003 value");
             }
+          else
+          {
+            Serial.println("Fail sending");
+          }
+          char payloadDHT11[10];
+          sprintf(payloadDHT11, "%d %d", humidity, temp_c);
+          if(mqtt.publish("SENSOR/DHT11", payloadDHT11) == true){
+            Serial.println("Success sending DHT11 value");
+          }
           else
           {
             Serial.println("Fail sending");
