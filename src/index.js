@@ -25,13 +25,3 @@ server.on('published', (packet, client) => {
     console.log(`PM 2.5: ${data[2]}`)
     console.log(`PM 10: ${data[3]}`)
 })
-
-
-
-
-function name(params) {
-    return params+1;
-}
-
-
-name(5);

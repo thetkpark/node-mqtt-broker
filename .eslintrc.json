@@ -1,0 +1,39 @@
+{
+	"env": {
+		"browser": true,
+		"commonjs": true,
+		"es6": true,
+		"jest": true
+	},
+	"extends": [
+		"airbnb",
+		"prettier",
+		"plugin:node/recommended",
+		"plugin:jest/recommended"
+	],
+	"globals": {
+		"Atomics": "readonly",
+		"SharedArrayBuffer": "readonly"
+	},
+	"parserOptions": {
+		"ecmaVersion": 2018
+	},
+	"plugins": ["prettier", "jest"],
+	"rules": {
+		"prettier/prettier": "error",
+		"no-undef": "warn",
+		"no-console": "off",
+		"jest/no-disabled-tests": "warn",
+		"jest/no-focused-tests": "error",
+		"jest/no-identical-title": "error",
+		"jest/prefer-to-have-length": "warn",
+		"jest/valid-expect": "error",
+		"eqeqeq": "warn",
+		"camelcase": "warn",
+		"one-var": "off",
+		"no-underscore-dangle": "off",
+		"node/no-unpublished-require": "off",
+		"prefer-destructuring": "off",
+		"no-param-reassign": "warn"
+	}
+}

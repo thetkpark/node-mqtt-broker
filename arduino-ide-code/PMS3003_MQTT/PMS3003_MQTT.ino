@@ -113,7 +113,6 @@ void loop()
           sprintf(payload, "%u %u %u", pm1, pm2_5, pm10); 
           if (mqtt.publish("SENSOR/PMS3003", payload) == true)
             {
-              //ส่งข้อความ "Arduino Test MQTT" ใน Topic = "TEST/MQTT"
               Serial.println("Success sending");
             }
           else
