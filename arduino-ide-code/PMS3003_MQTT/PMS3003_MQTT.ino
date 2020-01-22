@@ -4,7 +4,7 @@
 #include "DHTesp.h"
 #define WIFI_STA_NAME "888/73 Guest"
 #define WIFI_STA_PASS "guest88873"
-#define MQTT_SERVER "192.168.2.103"
+#define MQTT_SERVER "host.mqtt"
 #define MQTT_PORT 1883
 #define MQTT_USERNAME ""
 #define MQTT_PASSWORD ""
