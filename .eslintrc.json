@@ -1,20 +1,10 @@
 {
 	"env": {
-		"browser": true,
-		"commonjs": true,
 		"es6": true,
-		"jest": true
+		"jest": false,
+		"node": true
 	},
-	"extends": [
-		"airbnb",
-		"prettier",
-		"plugin:node/recommended",
-		"plugin:jest/recommended"
-	],
-	"globals": {
-		"Atomics": "readonly",
-		"SharedArrayBuffer": "readonly"
-	},
+	"extends": ["airbnb", "prettier", "plugin:node/recommended"],
 	"parserOptions": {
 		"ecmaVersion": 2018
 	},
@@ -34,6 +24,9 @@
 		"no-underscore-dangle": "off",
 		"node/no-unpublished-require": "off",
 		"prefer-destructuring": "off",
-		"no-param-reassign": "warn"
+		"no-param-reassign": "warn",
+		"no-unused-vars": "warn",
+		"consistent-return": "off",
+		"prefer-const": "warn"
 	}
 }
