@@ -1,8 +1,11 @@
 {
 	"name": "node-mqtt-broker",
+	"scripts": {
+		"now-build": "yarn build"
+	},
 	"builds": [
 		{
-			"src": "src/index.js",
+			"src": "build/main.js",
 			"use": "@now/node-server"
 		}
 	]
