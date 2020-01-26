@@ -6,7 +6,6 @@
 	"dependencies": {
 		"backpack-core": "^0.8.4",
 		"express": "^4.17.1",
-		"knex": "^0.20.8",
 		"mosca": "^2.8.3",
 		"sqlite3": "^4.1.1"
 	},

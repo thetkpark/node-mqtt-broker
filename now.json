@@ -1,9 +1,0 @@
-{
-	"name": "node-mqtt-broker",
-	"builds": [
-		{
-			"src": "build/main.js",
-			"use": "@now/node-server"
-		}
-	]
-}
