@@ -14,7 +14,7 @@ const routes = app => {
 			console.log(rows)
 			res.send(rows[0])
 		})
-})
+	})
 }
 
 module.exports = routes

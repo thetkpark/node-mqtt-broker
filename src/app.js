@@ -24,24 +24,24 @@ server.on('clientDisconnected', client => {
 
 server.on('published', (packet, client) => {
 	if (/[a-z]/.test(packet.payload.toString())) return 0
-	// const topic = packet.topic
+	const topic = packet.topic
 	// if (/\w*\/DHT11/.test(topic)) {
 	// 	const data = /(\d*) (\d*)/.exec(packet.payload.toString())
 	// 	console.log(`Humidity: ${data[1]}`)
 	// 	console.log(`Temp: ${data[2]}\n`)
 	// }
-	// if (/\w*\/PMS3003/.test(topic)) {
-	const value = /(\d*) (\d*) (\d*)/.exec(packet.payload.toString())
-	console.log(packet.payload.toString())
-	// const data = {
-	// 	timestamp: new Date(),
-	// 	pm1: value[1],
-	// 	pm25: value[2],
-	// 	pm10: value[3]
-	// }
-	addData(value[1], value[2], value[3])
-	// addPollutionData(data
-	// }
+	if (/\w*\/PMS3003/.test(topic)) {
+		const value = /(\d*) (\d*) (\d*)/.exec(packet.payload.toString())
+		console.log(packet.payload.toString())
+		// const data = {
+		// 	timestamp: new Date(),
+		// 	pm1: value[1],
+		// 	pm25: value[2],
+		// 	pm10: value[3]
+		// }
+		addData(value[1], value[2], value[3])
+		// addPollutionData(data
+	}
 })
 
 routers(app)

@@ -18,7 +18,7 @@ const addData = (pm1, pm25, pm10) => {
 
 	db.run(sql_insert, err => {
 		if (err) console.error(err.message)
-		console.log('Successful insert data')
+		// console.log('Successful insert data')
 	})
 }
 
