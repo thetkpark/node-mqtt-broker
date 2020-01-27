@@ -1,7 +1,6 @@
 const mosca = require('mosca')
 const express = require('express')
 const routers = require('./routers.js')
-const { addData } = require('./utils/sqlite')
 
 const app = express()
 const setting = {
@@ -29,16 +28,10 @@ server.on('published', (packet, client) => {
 	// 	console.log(`Humidity: ${data[1]}`)
 	// 	console.log(`Temp: ${data[2]}\n`)
 	// }
-	if (/\w*\/PMS3003/.test(topic)) {
+	if (/PARQUE\/WEATHER\/INSIDE/.test(topic)) {
 		const value = /(\d*) (\d*) (\d*)/.exec(packet.payload.toString())
 		console.log(packet.payload.toString())
-		// const data = {
-		// 	timestamp: new Date(),
-		// 	pm1: value[1],
-		// 	pm25: value[2],
-		// 	pm10: value[3]
-		// }
-		addData(value[1], value[2], value[3])
+		// addData(value[1], value[2], value[3])
 		// addPollutionData(data
 	}
 })

@@ -1,19 +1,25 @@
-// const pms3003Record = require('./utils/google_sheet')
-const { db } = require('./utils/sqlite')
+const knex = require('../db/knex')
 
 const routes = app => {
 	app.get('/', (req, res) => {
 		res.send('HEllo')
 	})
 
-	app.get('/api', (req, res) => {
-		const sql_select = `SELECT * FROM pms3003 ORDER BY timestamp DESC LIMIT 1`
-		db.all(sql_select, (err, rows) => {
-			if (err) console.error(err.message)
-			console.log('Successful select data')
-			console.log(rows)
-			res.send(rows[0])
-		})
+	app.get('/api/now', async (req, res) => {
+		const data = await knex
+			.select('*')
+			.from('parque_weather_outside')
+			.orderBy('created_at', 'desc')
+			.limit(1)
+		res.send(data)
+	})
+
+	app.get('/api/avg', async (req, res) => {
+		const now = Date.now()
+		// const data = await knex
+		// 	.select('*')
+		// 	.from('parque_weather_outside')
+		// 	.whereBetween('created_at', [])
 	})
 }
 
