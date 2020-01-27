@@ -1,7 +1,6 @@
 const mosca = require('mosca')
 const express = require('express')
 const routers = require('./routers.js')
-const addPollutionData = require('./utils/google_sheet')
 const { addData } = require('./utils/sqlite')
 
 const app = express()
