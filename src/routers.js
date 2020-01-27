@@ -1,3 +1,4 @@
+const moment = require('moment')
 const knex = require('../db/knex')
 
 const routes = app => {
@@ -15,7 +16,11 @@ const routes = app => {
 	})
 
 	app.get('/api/avg', async (req, res) => {
-		const now = Date.now()
+		const datetime = moment().format('YYYY-MM-DD HH:mm:ss')
+		const pastDatetime = moment()
+			.subtract(1, 'hours')
+			.format('YYYY-MM-DD HH:mm:ss')
+		res.send({ datetime, pastDatetime })
 		// const data = await knex
 		// 	.select('*')
 		// 	.from('parque_weather_outside')
