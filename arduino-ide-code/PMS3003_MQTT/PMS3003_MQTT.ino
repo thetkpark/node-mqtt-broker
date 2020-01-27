@@ -126,25 +126,16 @@ void loop()
     if (mqtt.connect(MQTT_NAME, MQTT_USERNAME, MQTT_PASSWORD)){ 
  
           Serial.print("\n Publish message: ");
-          char payloadPMS3003[100];
-          sprintf(payloadPMS3003, "%u %u %u", pm1, pm2_5, pm10); 
-          if (mqtt.publish("SENSOR/PMS3003", payloadPMS3003) == true)
+          char payload[100];
+          sprintf(payload, "%u %u %u %u %u", pm1, pm2_5, pm10, humidity, temp_c); 
+          if (mqtt.publish("PARQUE/WEATHER/INSIDE", payload))
             {
-              Serial.println("Success sending PMS3003 value");
+              Serial.println("Success sending PMS3003 and DHT11 value");
             }
           else
           {
             Serial.println("Fail sending");
           }
-          char payloadDHT11[10];
-          sprintf(payloadDHT11, "%d %d", humidity, temp_c);
-          if(mqtt.publish("SENSOR/DHT11", payloadDHT11) == true){
-            Serial.println("Success sending DHT11 value");
-          }
-          else
-          {
-            Serial.println("Fail sending");
-          }
         }
-    delay(10000);
+    delay(30000);
 }
