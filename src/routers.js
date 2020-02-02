@@ -16,15 +16,17 @@ const routes = app => {
 	})
 
 	app.get('/api/avg', async (req, res) => {
-		const datetime = moment().format('YYYY-MM-DD HH:mm:ss')
+		const datetime = moment()
+			.utc()
+			.format('YYYY-MM-DD HH:mm:ss')
 		const pastDatetime = moment()
+			.utc()
 			.subtract(1, 'hours')
 			.format('YYYY-MM-DD HH:mm:ss')
-		res.send({ datetime, pastDatetime })
-		// const data = await knex
-		// 	.select('*')
-		// 	.from('parque_weather_outside')
-		// 	.whereBetween('created_at', [])
+		const data = await knex
+			.select('*')
+			.from('parque_weather_outside')
+			.whereBetween('created_at', [pastDatetime, datetime])
 	})
 }
 
